@@ -11,11 +11,15 @@ Ensure you have [Node.js](https://nodejs.org/en) installed before attempting to 
    git clone https://github.com/<username>/react-wordle
    ```
 4. Navigate to the cloned respository.
-5. Run the development server.
+5. Install dependencies
+   ```
+   npm install
+   ```
+7. Run the development server.
    ```
    npm run dev
    ```
-6. Open [http://localhost:5173/](http://localhost:5173/) or `Ctrl + Click` on the link in your terminal.
+8. Open [http://localhost:5173/](http://localhost:5173/) or `Ctrl + Click` on the link in your terminal.
 
 ## Acknowledgements
 I've made use of the [Merriam-Webster Collegiate Dictionary API](https://www.dictionaryapi.com/products/api-collegiate-dictionary) in this project.
