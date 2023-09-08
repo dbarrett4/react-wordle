@@ -12,23 +12,25 @@ const GameBoard: React.FC<GameBoardProps> = ({ targetWord, guesses}) => {
                 {guesses.map((guess, index) => (
                 <div key={index} className="guess-box">
                     {guess.split('').map((letter, letterIndex) => {
-                        const feedbackLetter = targetWord[letterIndex];
-                        const isCorrectPosition = letter === feedbackLetter; 
-                        const isCorrectLetter = targetWord.includes(letter);
+                        if (targetWord) {
+                            const feedbackLetter = targetWord[letterIndex];
+                            const isCorrectPosition = letter === feedbackLetter; 
+                            const isCorrectLetter = targetWord.includes(letter);
 
-                        let letterClass = 'letter-box';
+                            let letterClass = 'letter-box';
 
-                        if (isCorrectPosition) {
-                            letterClass += '-green';
-                        } else if (isCorrectLetter) {
-                            letterClass += '-orange';
+                            if (isCorrectPosition) {
+                                letterClass += '-green';
+                            } else if (isCorrectLetter) {
+                                letterClass += '-orange';
+                            }
+
+                            return (
+                                <span key={letterIndex} className={letterClass}>
+                                    {letter.toUpperCase()}
+                                </span>
+                            );
                         }
-
-                        return (
-                            <span key={letterIndex} className={letterClass}>
-                                {letter.toUpperCase()}
-                            </span>
-                        );
                     })}
                 </div>
                 ))}

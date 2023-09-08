@@ -7,15 +7,15 @@ import './App.css'
 
 const App: React.FC = () => {
   const[words, setWords] = useState<string[]>([]);
-  
-  const[targetWord, setTargetWord] = useState('');
+  const[targetWord, setTargetWord] = useState<string>('');
   const[guesses, setGuesses] = useState<string[]>([]);
-  const[feedback, setFeedback] = useState<string[]>([]);
+  const[feedback, setFeedback] = useState<string[]>(["Guess the 5 letter word"]);
   const[streak, setStreak] = useState<number>(0);
   const[highestStreak, setHighestStreak] = useState<number>(0);
   const[inputIsDisabled, setInputIsDisabled] = useState<boolean>(false);
 
   const maxAttempts = 6;
+  const defaultWordList = ['apple', 'cherry', 'plane', 'alien', 'child', 'radio', 'elite', 'adult', 'smoke', 'wheat', 'salad', 'basic']
   
   // Get the list of words from the words.txt file
   const fetchWords = async() => {
@@ -25,7 +25,7 @@ const App: React.FC = () => {
       const words = await response.text();
 
       // Parse
-      const wordList = words.toLowerCase().split('\n').filter(word => word.trim() !== '');
+      const wordList = await words.toLowerCase().split('\n').filter(word => word.trim() !== '');
       setWords(wordList);
     } catch(error) {
       console.error('Error fetching word list: ', error);
@@ -34,6 +34,14 @@ const App: React.FC = () => {
   
   useEffect(() => {
     fetchWords();
+
+    // Set initial target word
+    setTargetWord(generateRandomWord());
+    // Temporary fix for a bug where the word list won't initialise on startup. (Word list is loaded properly after first game/reset)
+    if (!targetWord) {
+      const index = Math.floor(Math.random() * defaultWordList.length);
+      setTargetWord(defaultWordList[index]);
+    } 
   }, []);
 
   // Returns a random value (word) from the words.txt file
@@ -81,17 +89,16 @@ const App: React.FC = () => {
         else {
           generateFeedback([""]);
         }
-
       }
     } catch(error) {
       console.error('Error validating word: ', error);
     }
     
-    // Check if guess is correct
-    const isCorrect = (guess.trim().toLowerCase() === targetWord.trim().toLowerCase());
-
     // Update guesses array with current guess
     setGuesses([...guesses, guess]);
+
+    // Check if guess is correct
+    const isCorrect = (guess.trim().toLowerCase() === targetWord.trim().toLowerCase());
     
     // Check for win or loss
     if (isCorrect) {
@@ -110,7 +117,6 @@ const App: React.FC = () => {
       generateFeedback(["You've lost. The word was: " + targetWord, "Click 'Reset Game' to play again"]);
       setStreak(0);
     }
-    
   };
 
   // Resets game board to initial state and selects a new word
@@ -127,11 +133,6 @@ const App: React.FC = () => {
   const generateFeedback = (messages: string[]) => {
     setFeedback(messages)
   }
-
-  // Generate random word when component mounts
-  useEffect(() => {
-    setTargetWord(generateRandomWord());
-  }, []);
 
   return (
     <div className='App'>

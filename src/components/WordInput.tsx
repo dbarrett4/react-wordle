@@ -30,6 +30,7 @@ const WordInput: React.FC<WordInputProps> = ({ onGuess, disabled }) => {
                     <form onSubmit={handleFormSubmit}>
                         <div className='form-group'>
                             <input
+                                id='guess-box'
                                 type='text'
                                 className='form-control'
                                 placeholder='Enter your guess...'
