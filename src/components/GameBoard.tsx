@@ -26,7 +26,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ targetWord, guesses}) => {
 
                         return (
                             <span key={letterIndex} className={letterClass}>
-                                {letter}
+                                {letter.toUpperCase()}
                             </span>
                         );
                     })}
@@ -40,13 +40,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ targetWord, guesses}) => {
     
     return (
         <div className ="container mt-4">
-            <div className ="row">
-                <div className ="col">
-                    {/* Target word*/}
-                    {targetWord}
-                </div>
-            </div>
-
             <div className="row mt-3">
                 <div className="col">
                     {renderFeedback()}
