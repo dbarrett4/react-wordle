@@ -21,7 +21,7 @@ const App: React.FC = () => {
   const fetchWords = async() => {
     try {
       // Open words.txt file
-      const response = await fetch('/words.txt')
+      const response = await fetch('/react-wordle/words.txt')
       const words = await response.text();
 
       // Parse
