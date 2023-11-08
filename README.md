@@ -4,7 +4,7 @@ A simple [Wordle](https://www.nytimes.com/games/wordle/index.html) remake. Made 
 Deployed at: https://dhillyon.github.io/react-wordle/
 
 ## Run locally
-Ensure you have [Node.js](https://nodejs.org/en) installed before attempting to run this project. I developed it on v18.17.1 so I recommend being on at least that.
+Ensure you have [Node.js](https://nodejs.org/en) installed before attempting to run this project.
 
 1. Fork the repository by clicking on `Fork` option on the top right of the repository.
 2. Open a terminal on your local computer (I recommend Git Bash).
